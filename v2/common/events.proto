@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package egt.registration.v2;
+
+option java_package = "com.egt.client.registration.api.v2.common";
+option go_package = "gitlab.egt-ua.loc/apis/gen/user-management/registration-service/v2/common";
+option java_multiple_files = true;
+
+import "v2/common/common.proto";
+
+message RegistrationSucceedEvent {
+    //Client's login
+    string login = 1;
+    //Id of the registered Client
+    string client_id = 2;
+    //Client`s token
+    string token = 3;
+    //Registration promo code
+    string promo_code = 4;
+    string currency = 5;
+    RegistrationSource registration_source = 6;
+    string affiliate_token = 7;
+}
+
+message RegistrationFailedEvent {
+    //Client's login
+    string login = 1;
+    //Id of the registered Client. Optional, if exist
+    string client_id = 2;
+}

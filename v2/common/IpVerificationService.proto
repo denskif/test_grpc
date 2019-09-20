@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package egt.registration.v2.common;
+
+option java_package = "com.egt.client.registration.api.v2.common";
+option go_package = "gitlab.egt-ua.loc/apis/gen/user-management/registration-service/v2/common";
+option java_multiple_files = true;
+
+service IpVerificationService {
+
+    //Verifies if client can proceed with registration
+    rpc VerifyClient (VerifyClientRequest) returns (VerifyClientResponse);
+}
+
+message VerifyClientRequest {
+}
+
+message VerifyClientResponse {
+    ResponseCode code = 1;
+    string reason = 2;
+}
+
+enum ResponseCode {
+    CODE_UNSPECIFIED = 0;
+    OK = 1;
+    FORBIDDEN_IP_ADDRESS = 2;
+}

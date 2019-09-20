@@ -1,0 +1,7 @@
+grpcio
+grpcio-tools
+pytest==3.9.2
+selenium==3.14.1
+allure-pytest==2.5.5
+pytest-selenium==1.14.0
+pytest-xdist==1.25.0

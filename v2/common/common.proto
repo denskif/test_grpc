@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package egt.registration.v2;
+
+option java_package = "com.egt.client.registration.a`pi.v2.common";
+option go_package = "gitlab.egt-ua.loc/apis/gen/user-management/registration-service/v2/common";
+option java_multiple_files = true;
+
+enum Gender {
+    NOT_KNOWN = 0;
+    MALE = 1;
+    FEMALE = 2;
+    NOT_APPLICABLE = 3;
+}
+
+enum IdentityType {
+    IDENTITY_TYPE_UNSPECIFIED = 0;
+    PERSONAL_CODE = 1;
+    CNP = 2;
+}
+
+enum RegistrationSource {
+    SOURCE_UNSPECIFIED = 0;
+    FULL = 1;
+    EMAIL = 2;
+    PHONE = 3;
+    FACEBOOK = 4;
+    INSTAGRAM = 5;
+    GOOGLE = 6;
+}
+
+message CommonFields {
+    //Client's locale
+    string locale = 1;
+    string promo_code = 2;
+    string affiliate_token = 3;
+}

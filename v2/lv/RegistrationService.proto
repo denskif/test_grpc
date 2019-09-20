@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package egt.registration.v2.lv;
+
+option java_package = "com.egt.client.registration.api.v2.lv";
+option go_package = "gitlab.egt-ua.loc/apis/gen/user-management/registration-service/v2/lv";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "v2/common/common.proto";
+
+service RegistrationService {
+    // Possible errors:
+    //   grpc.Status [code: INVALID_ARGUMENT] [message: Invalid arguments]
+    //   errors details: BadRequest: FieldViolations
+    //
+    //   grpc.Status [code: ALREADY_EXISTS] [message: Client with one of the fields already exist]
+    //   errors details: PreconditionFailure: Violation: type
+    //           -   EMAIL_ALREADY_EXISTS
+    //           -   LOGIN_ALREADY_EXISTS
+    //           -   IBAN_ALREADY_EXISTS
+    //           -   PERSONAL_CODE_ALREADY_EXISTS
+    rpc RegisterClient (RegisterClientRequest) returns (RegisterClientResponse);
+}
+
+message RegisterClientRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string personal_code = 4;
+    google.protobuf.Timestamp birth_date = 5;
+    Gender gender = 6;
+    string bank_name = 7;
+    string iban = 8;
+    string address = 9;
+    string city = 10;
+    string postal_code = 11;
+    string phone_number = 12;
+    string login = 13;
+    string password = 14;
+    uint64 max_day_bet_amount = 15;
+    uint64 max_single_bet_amount = 16;
+    //Shows if Client is allowed email notifications
+    bool email_notification_allowed = 17;
+    //Client's locale
+    string locale = 18;
+    string promo_code = 19;
+    string currency = 20;
+}
+
+message RegisterClientResponse {
+    //Client's registration time
+    google.protobuf.Timestamp client_create_time = 1;
+}

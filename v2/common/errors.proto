@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package egt.registration.v2;
+
+option java_package = "com.egt.client.registration.api.v2.common";
+option go_package = "gitlab.egt-ua.loc/apis/gen/user-management/registration-service/v2/common";
+option java_multiple_files = true;
+
+message LatviaPreconditionError {
+    PreconditionErrorType precondition_error_type = 1;
+
+    enum PreconditionErrorType {
+        TYPE_UNSPECIFIED = 0;
+        EMAIL_ALREADY_EXISTS = 1;
+        LOGIN_ALREADY_EXISTS = 2;
+        IBAN_ALREADY_EXISTS = 3;
+        PERSONAL_CODE_ALREADY_EXISTS = 4;
+    }
+}
+
+message RomaniaPreconditionError {
+    PreconditionErrorType precondition_error_type = 1;
+
+    enum PreconditionErrorType {
+        TYPE_UNSPECIFIED = 0;
+        EMAIL_ALREADY_EXISTS = 1;
+        LOGIN_ALREADY_EXISTS = 2;
+        PERSONAL_CODE_ALREADY_EXISTS = 3;
+        FORBIDDEN_IP_ADDRESS = 4;
+    }
+}
+
+message ComPreconditionError {
+    PreconditionErrorType precondition_error_type = 1;
+
+    enum PreconditionErrorType {
+        TYPE_UNSPECIFIED = 0;
+        LOGIN_ALREADY_EXISTS = 1;
+        VERIFICATION_CODE_NOT_VALID = 2;
+        VERIFICATION_CODE_EXPIRED = 3;
+    }
+}

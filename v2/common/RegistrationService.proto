@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package egt.registration.v2.com;
+
+option java_package = "com.egt.client.registration.api.v2.com";
+option go_package = "gitlab.egt-ua.loc/apis/gen/user-management/registration-service/v2/com";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+//import "v2/common/common.proto";
+import "common.proto";
+//import "/home/denis/Downloads/registration-service-dev/v2/common/common.proto";
+
+
+service RegistrationService {
+    // Possible errors:
+    //   grpc.Status [code: INVALID_ARGUMENT] [message: Invalid arguments]
+    //   errors details: BadRequest: FieldViolations
+    //
+    //   grpc.Status [code: ALREADY_EXISTS] [message: Client with email already exist]
+    //   errors details: PreconditionFailure: Violation: type
+    //           -   EMAIL_ALREADY_EXISTS
+    rpc RegisterClientByEmail (RegisterClientByEmailRequest) returns (RegisterClientResponse);
+
+    // Init registration client by phone.
+    // Possible errors:
+    //   grpc.Status [code: INVALID_ARGUMENT] [message: Invalid arguments]
+    //   errors details: BadRequest: FieldViolations
+    //
+    //   grpc.Status [code: ALREADY_EXISTS] [message: Client with email already exist]
+    //   errors details: PreconditionFailure: Violation: type
+    //           -   LOGIN_ALREADY_EXISTS
+    rpc SendRegistrationCodeToPhone (SendRegistrationCodeToPhoneRequest) returns (SendRegistrationCodeToPhoneResponse);
+
+    // Finish client registration by phone.
+    // Possible errors:
+    //   grpc.Status [code: INVALID_ARGUMENT] [message: Invalid arguments]
+    //   errors details: BadRequest: FieldViolations
+    //
+    //   grpc.Status [code: ALREADY_EXISTS] [message: Client with email already exist]
+    //   errors details: PreconditionFailure: Violation: type
+    //           -   VERIFICATION_CODE_NOT_VALID
+    //           -   VERIFICATION_CODE_EXPIRED
+    rpc RegisterClientByPhone (RegisterClientByPhoneRequest) returns (RegisterClientResponse);
+}
+
+message RegisterClientByEmailRequest {
+    string email = 1;
+    string password = 2;
+    CommonFields common_fields = 3;
+}
+
+message SendRegistrationCodeToPhoneRequest {
+    string phone = 1;
+    //Client's locale
+    string locale = 2;
+}
+
+message SendRegistrationCodeToPhoneResponse {
+}
+
+message RegisterClientByPhoneRequest {
+    string phone = 1;
+    string code = 2;
+    string password = 3;
+    CommonFields common_fields = 4;
+}
+
+message RegisterClientResponse {
+    //Client's registration time
+    google.protobuf.Timestamp client_create_time = 1;
+}
